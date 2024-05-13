@@ -10,12 +10,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: '', component: Page1Component },
-<<<<<<< HEAD
-  { path: 'page3', component: Page3Component}
-=======
   { path: 'page2', component: Page2Component },
   { path: 'page3', component: Page3Component }
->>>>>>> 0a6b92af895dd73906c8f93496b60e2a22603e7c
 ];
 
 @NgModule({
