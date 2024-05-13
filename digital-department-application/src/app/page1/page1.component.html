@@ -108,11 +108,11 @@
           <textarea [(ngModel)]="structureSelected" name="structureSelected"></textarea>
         </div>
         <label><b>Количество в упаковке</b></label><br>
-        <input name="count" [(ngModel)]="selectedTask.count" pattern="[0-9]*">
+        <input name="count" [(ngModel)]="selectedTask.count" (keydown)="rejectNonNumeric($event)">
       </div>
       <div>
         <label><b>Срок годности</b></label><br>
-        <input name="expirationDate" [(ngModel)]="selectedTask.expirationDate" #creatorin = "ngModel" required/>
+        <input name="expirationDate" [(ngModel)]="selectedTask.expirationDate" #creatorin = "ngModel" required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
         <div [hidden] = "creatorin.valid || creatorin.untouched" class = "alert">
             Это поле обязательно для заполнения!
         </div>
