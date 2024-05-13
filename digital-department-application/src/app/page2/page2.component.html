@@ -1,0 +1,107 @@
+<table>
+    <tr>
+      <td style="vertical-align: top; width: 800px;">
+    <h2>Добавить объект "Аптека"</h2>
+      <div>
+        <label><b>Название аптеки</b></label><br>
+        <input name="name" [(ngModel)]="newTask.name" #titlein = "ngModel" required/>
+        <div [hidden] = "titlein.valid || titlein.untouched" class = "alert">
+            Это поле обязательно для заполнения!
+        </div>
+      </div>
+      <div>
+        <label><b>Адрес </b></label><br>
+        <input name="address" [(ngModel)]="newTask.address">
+    </div>
+      <div>
+        <label><b>Названия компаний (Используйте запятую в виде разделителя)</b></label><br>
+        <textarea [(ngModel)]="nameCompany" name="namesCompany"></textarea>
+      </div>
+      <div>
+        <label><b>Количество сотрудников</b></label><br>
+        <input name="count" [(ngModel)]="newTask.count" (keydown)="rejectNonNumeric($event)">
+      </div>
+      <div>
+        <label><b>Дата открытия</b></label><br>
+        <input name="dateOpen" [(ngModel)]="newTask.dateOpen" #creatorin = "ngModel" required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+        <div [hidden] = "creatorin.valid || creatorin.untouched" class = "alert">
+            Это поле обязательно для заполнения!
+        </div>
+      </div>
+      <div>
+        <label><b>Производство собственных лекарственных препаратов</b></label><br>
+        <input type="radio" name="production" value=true [(ngModel)]="newTask.production">Да<br>
+        <input type="radio" name="production" value=false  [(ngModel)]="newTask.production">Нет<br>
+      </div>
+      <button style = "margin-top: 10px;" (click)="addTask(titlein, creatorin)" [disabled]="titlein.invalid || creatorin.invalid">Добавить</button><br>
+  
+        <div *ngIf = "tasks.length>0">
+          <select [(ngModel)]="selectedTaskNumberForEdit">
+            <option *ngFor="let task of tasks" [value]="task.number">{{ task.number }}</option>
+          </select>
+          <button style = "margin-top: 10px;" (click)="loadTaskForEditing()">Редактировать задачу</button>
+        </div>
+
+        <p></p>
+        <div *ngIf = "tasks.length>0">
+          <table border='5' widht='500' height='100' align='center' bgcolor='white'>
+            <tr>
+            <td>Номер</td>
+            <td>Название аптеки</td>
+            <td>Адрес аптеки</td>
+            <td>Названия компаний</td>
+            <td>Количество сотрудников</td>
+            <td>Дата открытия</td>
+            <td>Производство собственных лекарственных препаратов</td>
+            </tr>
+            <tr *ngFor="let task of tasks" height='50%'>
+            <th> {{task.number}} </th>
+            <th> {{task.name}} </th>
+            <th> {{task.address}} </th>
+            <th> <div *ngFor="let element of task.namesCompany"> {{element}} </div></th>
+            <th> {{task.count}} </th>
+            <th> {{task.dateOpen}} </th>
+            <th> {{task.production}} </th>
+            </tr>
+          </table>
+        </div>
+  
+    <td style="vertical-align: top;"> 
+      <div *ngIf = "selectedTask!=null">
+        <h2>Редактировать задачу</h2>
+      <div>
+        <label><b>Название аптеки</b></label><br>
+        <input name="name" [(ngModel)]="selectedTask.name" #titlein = "ngModel" required/>
+        <div [hidden] = "titlein.valid || titlein.untouched" class = "alert">
+            Это поле обязательно для заполнения!
+        </div>
+      </div>
+      <div>
+        <label><b> Адрес </b></label><br>
+        <input name="address" [(ngModel)]="selectedTask.address">
+    </div>
+      <div>
+        <div>
+          <label><b> Названия компаний (Используйте запятую в виде разделителя)</b></label><br>
+          <textarea [(ngModel)]="nameCompanySelected" name="nameCompanySelected"></textarea>
+        </div>
+        <label><b>Количество в сотрудников</b></label><br>
+        <input name="count" [(ngModel)]="selectedTask.count" (keydown)="rejectNonNumeric($event)">
+      </div>
+      <div>
+        <label><b>Дата открытия</b></label><br>
+        <input name="dateOpen" [(ngModel)]="selectedTask.dateOpen" #creatorin = "ngModel" required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+        <div [hidden] = "creatorin.valid || creatorin.untouched" class = "alert">
+            Это поле обязательно для заполнения!
+        </div>
+      </div>
+      <div>
+        <label><b>Производство собственных лекарственных препаратов</b></label><br>
+        <input type="radio" name="production2" value=true [(ngModel)]="selectedTask.production">Да<br>
+        <input type="radio" name="production2" value=false  [(ngModel)]="selectedTask.production">Нет<br>
+      </div>
+      <button style = "margin-top: 10px;" (click)="updateTask()" [disabled]="titlein.invalid || creatorin.invalid">Сохранить</button><br>
+    </div>
+    </td>
+    </tr>
+  </table>
