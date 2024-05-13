@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: '', component: Page1Component }
+  { path: '', component: Page1Component },
+  { path: 'page3', component: Page3Component}
 ];
 
 @NgModule({
