@@ -31,7 +31,9 @@ input:not([type=radio]) {
 }
 
 .stack-forms {
-    padding-bottom: 100px ;
+    margin-bottom: 10px ;
+    
+    
 }
 
 input.ng-touched.ng-invalid {
@@ -62,10 +64,6 @@ textarea {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-}
-
-.drug-wrapper {
-    max-width: 300px;
 }
 
 select {
@@ -103,12 +101,17 @@ select {
 
 table {
     font-family: Roboto Regular;
+
     border: #444;
 }
 
 .pharm-table {
     vertical-align: top;
-    
+    width: 100%; max-width: 100%;
+    padding: 5px;
+	margin: -20px;
+	border: 1px solid #000000;
+	border-collapse: collapse; 
 }
 
 .pharm-table-td {
@@ -116,7 +119,18 @@ table {
     align-content: center;
     align-items: center;
     width: 80px;
-    padding: .5em;
+    padding: .2em;
+    width: 200px; /* Фиксированная ширина столбца */
+    word-break: break-all;
+    padding: 5px;
+	background: #ffffff00;
+	border: 1px solid #dddddd;
+}
+
+.drug-wrapper {
+    max-width: 320px;
+    text-wrap:wrap;
+    word-break:break-all;
 }
 
 table tr {

@@ -1,150 +1,143 @@
-<div class="wrapper">
-    <table>
-        <tr >
-            <td>
-                <div class="pharm-table"> <!--*ngIf = "tasks.length>0"-->
-                    <table>
-                        <h2>Список лекарств</h2>
-                        <td>
-
-                    </table>
-                    
-                    <table>
-                        <tr>
-                            <td class="pharm-table-td">Номер</td>
-                            <td class="pharm-table-td">Название</td>
-                            <td class="pharm-table-td">Категория</td>
-                            <td class="pharm-table-td">Доза</td>
-                            <td class="pharm-table-td">Состав</td>
-                            <td class="pharm-table-td">Количество в упаковке</td>
-                            <td class="pharm-table-td">Срок годности</td>
-                            <td class="pharm-table-td">Наличие лекарства в аптеке</td>
-                        </tr>
-                        <tr *ngFor="let task of tasks" height='50%'>
-                            <th> {{task.number}} </th>
-                            <th> {{task.name}} </th>
-                            <th> {{task.category}} </th>
-                            <th> {{task.dose}} </th>
-                            <th>
-                                <div *ngFor="let element of task.structureArray"> {{element}} </div>
-                            </th>
-                            <th> {{task.count}} </th>
-                            <th> {{task.expirationDate}} </th>
-                            <th> {{task.existence}} </th>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-            <td class="drug-wrapper">
-                <div >
-                    <h2>Добавление лекарства</h2>
-                    <div>
-                        <label>Название лекарства</label><br>
-                        <input class="textboxes" name="name" [(ngModel)]="newTask.name" #titlein="ngModel" required />
-                        <div [hidden]="titlein.valid || titlein.untouched" class="red-alert">
-                            Это поле обязательно для заполнения!
-                        </div>
-                    </div>
-                    <div>
-                        <label>Название категории </label><br>
-                        <select [(ngModel)]="newTask.category" name="category">
-                            <option value="Гормоны">Гормоны</option>
-                            <option value="Антибактериальные препараты">Антибактериальные препараты</option>
-                            <option value="Препараты, влияющие на иммунитет">Препараты, влияющие на иммунитет</option>
-                            <option value="Препараты влияющие на психику">Препараты влияющие на психику</option>
-                            <option value="Препараты, влияющие на функции желудочно-кишечного тракта">Препараты,
-                                влияющие на
-                                функции желудочно-кишечного тракта</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Дозировка</label><br>
-                        <textarea [(ngModel)]="newTask.dose" name="dose"></textarea>
-                    </div>
-                    <div>
-                        <label class="stack-forms">Состав (используйте запятую в качестве разделителя)</label><br>
-                        <textarea [(ngModel)]="structure" name="structure"></textarea>
-                    </div>
-                    <div>
-                        <label>Количество в упаковке</label><br>
-                        <input name="count" [(ngModel)]="newTask.count" (keydown)="rejectNonNumeric($event)" />
-                    </div>
-                    <div>
-                        <label>Срок годности</label><br>
-                        <input name="expirationDate" [(ngModel)]="newTask.expirationDate" #creatorin="ngModel" required
-                            maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
-                        <div [hidden]="creatorin.valid || creatorin.untouched" class="alert">
-                            Это поле обязательно для заполнения!
-                        </div>
-                    </div>
-                    <div>
-                        <label>Наличие лекарства в аптеке</label><br>
-                        <input type="radio" name="existence2" value=true [(ngModel)]="newTask.existence">Есть в
-                        наличии<br>
-                        <input type="radio" name="existence2" value=false [(ngModel)]="newTask.existence">Нет в
-                        наличии<br>
-                    </div>
-                    <button style="margin-top: 10px;" (click)="addTask(titlein, creatorin)"
-                        [disabled]="titlein.invalid || creatorin.invalid">Добавить</button><br>
-
-                    <div *ngIf="tasks.length>0">
-                        <select [(ngModel)]="selectedTaskNumberForEdit">
-                            <option *ngFor="let task of tasks" [value]="task.number">{{ task.number }}</option>
-                        </select>
-                        <button style="margin-top: 10px;" (click)="loadTaskForEditing()">Изменить лекарство...</button>
+<div class="wrapper ">
+    <div class="snp-wrap">
+        <main>
+            <div *ngIf = "tasks.length>0"> <!---->
+                <h2>Список лекарств</h2>
+                <table class="pharm-table">
+                    <tr>
+                        <td class="pharm-table-td">Номер</td>
+                        <td class="pharm-table-td">Название</td>
+                        <td class="pharm-table-td">Категория</td>
+                        <td class="pharm-table-td">Доза</td>
+                        <td class="pharm-table-td">Состав</td>
+                        <td class="pharm-table-td">Количество в упаковке</td>
+                        <td class="pharm-table-td">Срок годности</td>
+                        <td class="pharm-table-td">Наличие лекарства в аптеке</td>
+                    </tr>
+                    <tr *ngFor="let task of tasks" height='50%'>
+                        <th class="pharm-table-td"> {{task.number}} </th>
+                        <th class="pharm-table-td"> {{task.name}} </th>
+                        <th class="pharm-table-td"> {{task.category}} </th>
+                        <th class="pharm-table-td"> {{task.dose}} </th>
+                        <th class="pharm-table-td">
+                            <div *ngFor="let element of task.structureArray"> {{element}} </div>
+                        </th>
+                        <th class="pharm-table-td"> {{task.count}} </th>
+                        <th class="pharm-table-td"> {{task.expirationDate}} </th>
+                        <th class="pharm-table-td"> {{task.existence}} </th>
+                    </tr>
+                </table>
+            </div>
+        </main>
+        <aside>
+            <div>
+                <h2>Добавление лекарства</h2>
+                <div class="stack-forms">
+                    <label>Название лекарства</label><br>
+                    <input class="textboxes" name="name" [(ngModel)]="newTask.name" #titlein="ngModel" required />
+                    <div [hidden]="titlein.valid || titlein.untouched" class="red-alert">
+                        Это поле обязательно для заполнения!
                     </div>
                 </div>
-
-                <div class="tr-global" *ngIf="selectedTask!=null">
-                    <h2>Изменение лекарства</h2>
-                    <div>
-                        <label><b>Название лекарства</b></label><br>
-                        <input name="name" [(ngModel)]="selectedTask.name" #titlein="ngModel" required />
-                        <div [hidden]="titlein.valid || titlein.untouched" class="alert">
-                            Это поле обязательно для заполнения!
-                        </div>
-                    </div>
-                    <div>
-                        <label><b>Название категории </b></label><br>
-                        <select [(ngModel)]="selectedTask.category" name="category">
-                            <option value="Гормоны">Гормоны</option>
-                            <option value="Антибактериальные препараты">Антибактериальные препараты</option>
-                            <option value="Препараты, влияющие на иммунитет">Препараты, влияющие на иммунитет</option>
-                            <option value="Препараты влияющие на психику">Препараты влияющие на психику</option>
-                            <option value="Препараты, влияющие на функции желудочно-кишечного тракта">Препараты,
-                                влияющие на функции желудочно-кишечного тракта</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Дозировка</label><br>
-                        <textarea [(ngModel)]="selectedTask.dose" name="dose"></textarea>
-                    </div>
-                    <div>
-                        <div>
-                            <label><b>Состав (используйте запятую в качестве разделителя)</b></label><br>
-                            <textarea [(ngModel)]="structureSelected" name="structureSelected"></textarea>
-                        </div>
-                        <label class="stack-forms">Количество в упаковке</label>
-
-                        <input name="count" [(ngModel)]="selectedTask.count" pattern="[0-9]*">
-                    </div>
-                    <div>
-                        <label>Срок годности</label><br>
-                        <input name="expirationDate" [(ngModel)]="selectedTask.expirationDate" #creatorin="ngModel"
-                            required />
-                        <div [hidden]="creatorin.valid || creatorin.untouched" class="alert">
-                            Это поле обязательно для заполнения!
-                        </div>
-                    </div>
-                    <div>
-                        <label><b>Наличие лекарства в аптеке</b></label><br>
-                        <input type="radio" name="existence" value=true [(ngModel)]="selectedTask.existence">Да<br>
-                        <input type="radio" name="existence" value=false [(ngModel)]="selectedTask.existence">Нет<br>
-                    </div>
-                    <button style="margin-top: 10px;" (click)="updateTask()"
-                        [disabled]="titlein.invalid || creatorin.invalid">Сохранить</button><br>
+                <div class="stack-forms">
+                    <label>Название категории </label><br>
+                    <select [(ngModel)]="newTask.category" name="category">
+                        <option value="Гормоны">Гормоны</option>
+                        <option value="Антибактериальные препараты">Антибактериальные препараты</option>
+                        <option value="Препараты, влияющие на иммунитет">Препараты, влияющие на иммунитет</option>
+                        <option value="Препараты влияющие на психику">Препараты влияющие на психику</option>
+                        <option value="Препараты, влияющие на функции желудочно-кишечного тракта">Препараты,
+                            влияющие на
+                            функции желудочно-кишечного тракта</option>
+                    </select>
                 </div>
-            </td>
-        </tr>
-    </table>
+                <div class="stack-forms">
+                    <label>Дозировка</label><br>
+                    <textarea [(ngModel)]="newTask.dose" name="dose"></textarea>
+                </div>
+                <div class="stack-forms">
+                    <label >Состав (используйте запятую в качестве разделителя)</label><br>
+                    <textarea [(ngModel)]="structure" name="structure"></textarea>
+                </div>
+                <div class="stack-forms">
+                    <label>Количество в упаковке</label><br>
+                    <input name="count" [(ngModel)]="newTask.count" (keydown)="rejectNonNumeric($event)" />
+                </div>
+                <div class="stack-forms">
+                    <label>Срок годности</label><br>
+                    <input name="expirationDate" [(ngModel)]="newTask.expirationDate" #creatorin="ngModel" required
+                        maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                    <div [hidden]="creatorin.valid || creatorin.untouched" class="alert">
+                        Это поле обязательно для заполнения!
+                    </div>
+                </div>
+                <div>
+                    <label>Наличие лекарства в аптеке</label><br>
+                    <input type="radio" name="existence2" value=true [(ngModel)]="newTask.existence">Есть в
+                    наличии<br>
+                    <input type="radio" name="existence2" value=false [(ngModel)]="newTask.existence">Нет в
+                    наличии<br>
+                </div>
+                <button style="margin-top: 10px;" (click)="addTask(titlein, creatorin)"
+                    [disabled]="titlein.invalid || creatorin.invalid">Добавить</button><br>
+
+                <div *ngIf="tasks.length>0">
+                    <select [(ngModel)]="selectedTaskNumberForEdit">
+                        <option *ngFor="let task of tasks" [value]="task.number">{{ task.number }}</option>
+                    </select>
+                    <button style="margin-top: 10px;" (click)="loadTaskForEditing()">Изменить лекарство...</button>
+                </div>
+            </div>
+
+            <div class="tr-global" *ngIf="selectedTask!=null">
+                <h2>Изменение лекарства</h2>
+                <div>
+                    <label><b>Название лекарства</b></label><br>
+                    <input name="name" [(ngModel)]="selectedTask.name" #titlein="ngModel" required />
+                    <div [hidden]="titlein.valid || titlein.untouched" class="alert">
+                        Это поле обязательно для заполнения!
+                    </div>
+                </div>
+                <div>
+                    <label><b>Название категории </b></label><br>
+                    <select [(ngModel)]="selectedTask.category" name="category">
+                        <option value="Гормоны">Гормоны</option>
+                        <option value="Антибактериальные препараты">Антибактериальные препараты</option>
+                        <option value="Препараты, влияющие на иммунитет">Препараты, влияющие на иммунитет</option>
+                        <option value="Препараты влияющие на психику">Препараты влияющие на психику</option>
+                        <option value="Препараты, влияющие на функции желудочно-кишечного тракта">Препараты,
+                            влияющие на функции желудочно-кишечного тракта</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Дозировка</label><br>
+                    <textarea [(ngModel)]="selectedTask.dose" name="dose"></textarea>
+                </div>
+                <div>
+                    <div>
+                        <label><b>Состав (используйте запятую в качестве разделителя)</b></label><br>
+                        <textarea [(ngModel)]="structureSelected" name="structureSelected"></textarea>
+                    </div>
+                    <label class="stack-forms">Количество в упаковке</label>
+
+                    <input name="count" [(ngModel)]="selectedTask.count" pattern="[0-9]*">
+                </div>
+                <div>
+                    <label>Срок годности</label><br>
+                    <input name="expirationDate" [(ngModel)]="selectedTask.expirationDate" #creatorin="ngModel"
+                        required />
+                    <div [hidden]="creatorin.valid || creatorin.untouched" class="alert">
+                        Это поле обязательно для заполнения!
+                    </div>
+                </div>
+                <div>
+                    <label><b>Наличие лекарства в аптеке</b></label><br>
+                    <input type="radio" name="existence" value=true [(ngModel)]="selectedTask.existence">Да<br>
+                    <input type="radio" name="existence" value=false [(ngModel)]="selectedTask.existence">Нет<br>
+                </div>
+                <button style="margin-top: 10px;" (click)="updateTask()"
+                    [disabled]="titlein.invalid || creatorin.invalid">Сохранить</button><br>
+            </div>
+        </aside>
+    </div>
 </div>

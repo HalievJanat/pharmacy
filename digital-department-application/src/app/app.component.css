@@ -1,1 +1,19 @@
 @import url('src/styles.css');
+
+header {
+    background: linear-gradient(to right, #0099ff, #66ccff);
+    height: 60px;
+    width: 100;
+    /* margin: -8px; */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
