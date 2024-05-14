@@ -9,7 +9,7 @@
                     <select [(ngModel)]="selectedTaskNumberForEdit">
                         <option *ngFor="let task of tasks" [value]="task.number">{{ task.number }}</option>
                     </select>
-                    <button style="margin-top: 10px;" (click)="loadTaskForEditing()">Редактировать задачу</button>
+                    <button style="margin-top: 10px" (click)="loadTaskForEditing()">Изменить аптеку...</button>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
         </main>
         <aside class="main-section">
 
-            <h2>Добавить объект "Аптека"</h2>
+            <h2>Добавление аптеки</h2>
             <div class="stack-forms">
                 <label>Название аптеки</label><br>
                 <input name="name" [(ngModel)]="newTask.name" #titlein="ngModel" required />
@@ -62,7 +62,7 @@
             </div>
             <div class="stack-forms">
                 <label>Дата открытия</label><br>
-                <input name="dateOpen" [(ngModel)]="newTask.dateOpen" #creatorin="ngModel" required maxlength="10"
+                <input name="dateOpen" [(ngModel)]="newTask.dateOpen" #creatorin="ngModel" required minlength="8" maxlength="10"
                     (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
                 <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
                     Это поле обязательно для заполнения!
@@ -81,7 +81,7 @@
 
 
             <div *ngIf="selectedTask!=null">
-                <h2>Редактировать задачу</h2>
+                <h2>Изменение аптеки</h2>
                 <div class="stack-forms">
                     <label>Название аптеки</label><br>
                     <input name="name" [(ngModel)]="selectedTask.name" #titlein="ngModel" required />
@@ -105,7 +105,7 @@
                 <div class="stack-forms">
                     <label>Дата открытия</label><br>
                     <input name="dateOpen" [(ngModel)]="selectedTask.dateOpen" #creatorin="ngModel" required
-                        maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                       minlength="8" maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
                     <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
                         Это поле обязательно для заполнения!
                     </div>

@@ -76,7 +76,7 @@
                 <div class="stack-forms">
                     <label>Срок годности</label><br>
                     <input name="expirationDate" [(ngModel)]="newTask.expirationDate" #creatorin="ngModel" required
-                        maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                        minlength="8" maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
                     <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
                         Это поле обязательно для заполнения!
                     </div>
@@ -137,7 +137,8 @@
                 <div class="stack-forms">
                     <label>Срок годности</label><br>
                     <input name="expirationDate" [(ngModel)]="selectedTask.expirationDate" #creatorin="ngModel"
-                        required />
+                    required
+                    minlength="8" maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY" />
                     <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
                         Это поле обязательно для заполнения!
                     </div>

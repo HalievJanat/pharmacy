@@ -3,14 +3,13 @@
         <main class="main-section">
             <div style="padding-bottom:50px;"> <!-- -->
                 <div style="display: flex; justify-content: space-between;">
-                    <h2>Список лекарств</h2>
-
+                    <h2>Список поставщиков</h2>
                     <div *ngIf="suppliers.length>0">
                         <select [(ngModel)]="selectedSupplyNumberForEdit">
                             <option *ngFor="let supply of suppliers" [value]="supply.number">{{ supply.number }}
                             </option>
                         </select>
-                        <button style="margin-top: 10px;" (click)="loadTaskForEditing()">Редактировать</button>
+                        <button style="margin-top: 10px" (click)="loadTaskForEditing()">Изменить поставщика...</button>
                     </div>
                 </div>
             </div>
@@ -37,7 +36,7 @@
 
         </main>
         <aside class="main-section">
-            <h2>Добавить объект "Поставщик"</h2>
+            <h2>Добавление поставщика</h2>
             <div class="stack-forms">
                 <label>ФИО поставщика</label><br>
                 <input name="fio" [(ngModel)]="newSuppliers.fio" #titlein="ngModel" required />
@@ -56,7 +55,7 @@
             <div class="stack-forms">
                 <label>Дата доставки</label><br>
                 <input name="deliveryDate" [(ngModel)]="newSuppliers.deliveryDate" #creatorin="ngModel" required
-                    maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                minlength="8" maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
                 <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
                     Это поле обязательно для заполнения!
                 </div>
@@ -77,7 +76,7 @@
 
             <td style="vertical-align: top;">
                 <div *ngIf="selectedSupply!=null">
-                    <h2>Редактировать</h2>
+                    <h2>Изменение поставщика</h2>
                     <div class="stack-forms">
                         <label>ФИО поставщика</label><br>
                         <input name="fio" [(ngModel)]="selectedSupply.fio" #titlein="ngModel" required />
@@ -96,7 +95,7 @@
                     <div class="stack-forms">
                         <label>Дата доставки</label><br>
                         <input name="deliveryDate" [(ngModel)]="selectedSupply.deliveryDate" #creatorin="ngModel"
-                            required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                            required minlength="8" maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
                         <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
                             Это поле обязательно для заполнения!
                         </div>
