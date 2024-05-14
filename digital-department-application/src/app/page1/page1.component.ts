@@ -26,7 +26,6 @@ export class Page1Component  {
     category: 'Гормоны',
     existence: false
   };
-  filteredTasks: Pharmacy[] = [];
   selectedTaskNumber: string = 'all';
   selectedTaskNumberForEdit: number = 1;
   selectedTask: Pharmacy | null = null;

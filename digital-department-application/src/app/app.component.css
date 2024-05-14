@@ -1,0 +1,30 @@
+@import url('src/styles.css');
+
+header {
+    background: linear-gradient(to right, #0099ff, #66ccff);
+    height: 60px;
+    /* margin: -8px; */
+}
+
+a {
+    font-family: 'Roboto Regular';
+    font-style: normal;
+    text-decoration: none; 
+    color:#FFFFFF;
+    margin:8px;
+}
+
+a:link { color: #FFFFFF; }
+a:hover { color: #ffd000; }
+a:active { color: #ff9800; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-inner {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
