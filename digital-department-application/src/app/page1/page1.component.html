@@ -97,3 +97,69 @@
                 </div>
                 <button style="margin-top: 10px;" (click)="addTask(titlein, creatorin)"
                     [disabled]="titlein.invalid || creatorin.invalid">Добавить</button><br>
+
+
+            </div>
+
+            <div class="tr-global" *ngIf="selectedTask!=null">
+                <h2>Изменение лекарства</h2>
+                <div class="stack-forms">
+                    <label>Название лекарства</label><br>
+                    <input name="name" [(ngModel)]="selectedTask.name" #titlein="ngModel" required />
+                    <div [hidden]="titlein.valid || titlein.untouched" class="red-alert">
+                        Это поле обязательно для заполнения!
+                    </div>
+                </div>
+                <div class="stack-forms">
+                    <label>Название категории </label><br>
+                    <select [(ngModel)]="selectedTask.category" name="category">
+                        <option value="Гормоны">Гормоны</option>
+                        <option value="Антибактериальные препараты">Антибактериальные препараты</option>
+                        <option value="Препараты, влияющие на иммунитет">Препараты, влияющие на иммунитет</option>
+                        <option value="Препараты влияющие на психику">Препараты влияющие на психику</option>
+                        <option value="Препараты, влияющие на функции желудочно-кишечного тракта">Препараты,
+                            влияющие на функции желудочно-кишечного тракта</option>
+                    </select>
+                </div>
+                <div class="stack-forms">
+                    <label>Дозировка</label><br>
+                    <textarea [(ngModel)]="selectedTask.dose" name="dose"></textarea>
+                </div>
+                <div class="stack-forms">
+                    <label>Состав (используйте запятую в качестве разделителя)</label><br>
+                    <textarea [(ngModel)]="structureSelected" name="structureSelected"></textarea>
+                </div>
+                <div class="stack-forms">
+                    <label class="stack-forms">Количество в упаковке</label>
+
+                    <input name="count" [(ngModel)]="selectedTask.count" pattern="[0-9]*">
+                </div>
+                <div class="stack-forms">
+                    <label>Срок годности</label><br>
+                    <input name="expirationDate" [(ngModel)]="selectedTask.expirationDate" #creatorin="ngModel"
+                        required />
+                    <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
+                        Это поле обязательно для заполнения!
+                    </div>
+                </div>
+                <div class="stack-forms">
+                    <table style="width: 100%; display: flex; justify-content: space-between;">
+                        <label style=" max-width: 40%; word-wrap: break-word;">Наличие лекарства в аптеке</label>
+                        <td>
+                            <div>
+                                <input type="radio" name="existence1" value=true
+                                    [(ngModel)]="selectedTask.existence">Есть в
+                                наличии<br>
+                                <input type="radio" name="existence1" value=false
+                                    [(ngModel)]="selectedTask.existence">Нет в
+                                наличии<br>
+                            </div>
+                        </td>
+                    </table>
+                </div>
+                <button style="margin-top: 10px;" (click)="updateTask()"
+                    [disabled]="titlein.invalid || creatorin.invalid">Сохранить</button><br>
+            </div>
+        </aside>
+    </div>
+</div>
