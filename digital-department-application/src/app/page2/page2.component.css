@@ -1,11 +1,1 @@
-.alert {
-    background-color: #e7bdbb; 
-    color: rgb(160, 55, 55);
-    width: 169px; 
-    height: 35px; 
-    border-radius: 4px;
-} 
-input.ng-touched.ng-invalid {border:solid red 2px;}
-input.ng-touched.ng-valid {border:solid green 2px;}
-textarea {border: solid green 2px;}
-select {border: solid green 2px;}
+@import url('src/app/app.component.css');

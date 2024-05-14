@@ -1,97 +1,115 @@
-<table>
-    <tr>
-      <td style="vertical-align: top; width: 800px;">
-    <h2>Добавить объект "Поставщик"</h2>
-      <div>
-        <label><b>ФИО поставщика</b></label><br>
-        <input name="fio" [(ngModel)]="newSuppliers.fio" #titlein = "ngModel" required/>
-        <div [hidden] = "titlein.valid || titlein.untouched" class = "alert">
-            Это поле обязательно для заполнения!
-        </div>
-      </div>
-      <div>
-        <label><b>Лекарства в наличии (Используйте запятую в виде разделителя)</b></label><br>
-        <textarea [(ngModel)]="drugs" name="drugs"></textarea>
-      </div>
-      <div>
-        <label><b>Количество товара</b></label><br>
-        <input name="count" [(ngModel)]="newSuppliers.count" (keydown)="rejectNonNumeric($event)"/>
-      </div>
-      <div>
-        <label><b>Дата доставки</b></label><br>
-        <input name="deliveryDate" [(ngModel)]="newSuppliers.deliveryDate" #creatorin = "ngModel" required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
-        <div [hidden] = "creatorin.valid || creatorin.untouched" class = "alert">
-            Это поле обязательно для заполнения!
-        </div>
-      </div>
-      <div>
-        <label><b>Доставка осуществляется из России?</b></label><br>
-        <input type="radio" name="existence2" value=true [(ngModel)]="newSuppliers.isAbroad">Да<br>
-        <input type="radio" name="existence2" value=false  [(ngModel)]="newSuppliers.isAbroad">Нет<br>
-      </div>
-      <button style = "margin-top: 10px;" (click)="addTask(titlein, creatorin)" [disabled]="titlein.invalid || creatorin.invalid">Добавить</button><br>
-  
-        <div *ngIf = "suppliers.length>0">
-          <select [(ngModel)]="selectedSupplyNumberForEdit">
-            <option *ngFor="let supply of suppliers" [value]="supply.number">{{ supply.number }}</option>
-          </select>
-          <button style = "margin-top: 10px;" (click)="loadTaskForEditing()">Редактировать</button>
-        </div>
+<div class="wrapper">
+    <div class="snp-wrap">
+        <main class="main-section">
+            <div style="padding-bottom:50px;"> <!-- -->
+                <div style="display: flex; justify-content: space-between;">
+                    <h2>Список лекарств</h2>
 
-        <p></p>
-        <div *ngIf = "suppliers.length>0">
-          <table border='5' widht='500' height='100' align='center' bgcolor='white'>
-            <tr>
-            <td>Номер</td>
-            <td>ФИО поставщика</td>
-            <td>Лекарства в наличии (Используйте запятую в виде разделителя)</td>
-            <td>Количество товаров</td>
-            <td>Дата доставки</td>
-            <td>Доставка осуществляется из России?</td>
-            </tr>
-            <tr *ngFor="let supply of suppliers" height='50%'>
-            <th> {{supply.number}} </th>
-            <th> {{supply.fio}} </th>
-            <th> <div *ngFor="let element of supply.suppliedDrugs"> {{element}} </div></th>
-            <th> {{supply.count}} </th>
-            <th> {{supply.deliveryDate}} </th>
-            <th> {{supply.isAbroad}} </th>
-            </tr>
-          </table>
-        </div>
-  
-    <td style="vertical-align: top;"> 
-      <div *ngIf = "selectedSupply!=null">
-        <h2>Редактировать</h2>
-        <div>
-            <label><b>ФИО поставщика</b></label><br>
-            <input name="fio" [(ngModel)]="selectedSupply.fio" #titlein = "ngModel" required/>
-            <div [hidden] = "titlein.valid || titlein.untouched" class = "alert">
-                Это поле обязательно для заполнения!
+                    <div *ngIf="suppliers.length>0">
+                        <select [(ngModel)]="selectedSupplyNumberForEdit">
+                            <option *ngFor="let supply of suppliers" [value]="supply.number">{{ supply.number }}
+                            </option>
+                        </select>
+                        <button style="margin-top: 10px;" (click)="loadTaskForEditing()">Редактировать</button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div>
-            <label><b>Лекарства в наличии (Используйте запятую в виде разделителя)</b></label><br>
-            <textarea [(ngModel)]="drugsSelected" name="drugsSelected"></textarea>
-          </div>
-          <div>
-            <label><b>Количество товара</b></label><br>
-            <input name="count" [(ngModel)]="selectedSupply.count" (keydown)="rejectNonNumeric($event)"/>
-          </div>
-          <div>
-            <label><b>Дата доставки</b></label><br>
-            <input name="deliveryDate" [(ngModel)]="selectedSupply.deliveryDate" #creatorin = "ngModel" required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
-            <div [hidden] = "creatorin.valid || creatorin.untouched" class = "alert">
-                Это поле обязательно для заполнения!
+            <table class="pharm-table">
+                <tr>
+                    <td class="pharm-table-td">Номер</td>
+                    <td class="pharm-table-td">ФИО поставщика</td>
+                    <td class="pharm-table-td">Лекарства в наличии (Используйте запятую в виде разделителя)</td>
+                    <td class="pharm-table-td">Количество товаров</td>
+                    <td class="pharm-table-td">Дата доставки</td>
+                    <td class="pharm-table-td">Доставка осуществляется из России?</td>
+                </tr>
+                <tr *ngFor="let supply of suppliers" height='50%'>
+                    <th class="pharm-table-td"> {{supply.number}} </th>
+                    <th class="pharm-table-td"> {{supply.fio}} </th>
+                    <th class="pharm-table-td">
+                        <div *ngFor="let element of supply.suppliedDrugs"> {{element}} </div>
+                    </th>
+                    <th class="pharm-table-td"> {{supply.count}} </th>
+                    <th class="pharm-table-td"> {{supply.deliveryDate}} </th>
+                    <th class="pharm-table-td"> {{supply.isAbroad}} </th>
+                </tr>
+            </table>
+
+        </main>
+        <aside class="main-section">
+            <h2>Добавить объект "Поставщик"</h2>
+            <div class="stack-forms">
+                <label>ФИО поставщика</label><br>
+                <input name="fio" [(ngModel)]="newSuppliers.fio" #titlein="ngModel" required />
+                <div [hidden]="titlein.valid || titlein.untouched" class="red-alert">
+                    Это поле обязательно для заполнения!
+                </div>
             </div>
-          </div>
-          <div>
-            <label><b>Доставка осуществляется из России?</b></label><br>
-            <input type="radio" name="existence" value=true [(ngModel)]="selectedSupply.isAbroad">Да<br>
-            <input type="radio" name="existence" value=false  [(ngModel)]="selectedSupply.isAbroad">Нет<br>
-          </div>
-      <button style = "margin-top: 10px;" (click)="updateTask()" [disabled]="titlein.invalid || creatorin.invalid">Сохранить</button><br>
+            <div class="stack-forms">
+                <label>Лекарства в наличии (Используйте запятую в виде разделителя)</label><br>
+                <textarea [(ngModel)]="drugs" name="drugs"></textarea>
+            </div>
+            <div class="stack-forms">
+                <label>Количество товара</label><br>
+                <input name="count" [(ngModel)]="newSuppliers.count" (keydown)="rejectNonNumeric($event)" />
+            </div>
+            <div class="stack-forms">
+                <label>Дата доставки</label><br>
+                <input name="deliveryDate" [(ngModel)]="newSuppliers.deliveryDate" #creatorin="ngModel" required
+                    maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
+                    Это поле обязательно для заполнения!
+                </div>
+            </div>
+            <div class="stack-forms">
+                <label>Доставка осуществляется из России?</label><br>
+                <input type="radio" name="existence2" value=true [(ngModel)]="newSuppliers.isAbroad">Да<br>
+                <input type="radio" name="existence2" value=false [(ngModel)]="newSuppliers.isAbroad">Нет<br>
+            </div>
+            <button style="margin-top: 10px;" (click)="addTask(titlein, creatorin)"
+                [disabled]="titlein.invalid || creatorin.invalid">Добавить</button><br>
+
+
+
+            <div *ngIf="suppliers.length>0">
+
+            </div>
+
+            <td style="vertical-align: top;">
+                <div *ngIf="selectedSupply!=null">
+                    <h2>Редактировать</h2>
+                    <div class="stack-forms">
+                        <label>ФИО поставщика</label><br>
+                        <input name="fio" [(ngModel)]="selectedSupply.fio" #titlein="ngModel" required />
+                        <div [hidden]="titlein.valid || titlein.untouched" class="red-alert">
+                            Это поле обязательно для заполнения!
+                        </div>
+                    </div>
+                    <div class="stack-forms">
+                        <label>Лекарства в наличии (Используйте запятую в виде разделителя)</label><br>
+                        <textarea [(ngModel)]="drugsSelected" name="drugsSelected"></textarea>
+                    </div>
+                    <div class="stack-forms">
+                        <label>Количество товара</label><br>
+                        <input name="count" [(ngModel)]="selectedSupply.count" (keydown)="rejectNonNumeric($event)" />
+                    </div>
+                    <div class="stack-forms">
+                        <label>Дата доставки</label><br>
+                        <input name="deliveryDate" [(ngModel)]="selectedSupply.deliveryDate" #creatorin="ngModel"
+                            required maxlength="10" (input)="onDateInput($event)" placeholder="DD/MM/YYYY">
+                        <div [hidden]="creatorin.valid || creatorin.untouched" class="red-alert">
+                            Это поле обязательно для заполнения!
+                        </div>
+                    </div>
+                    <div class="stack-forms">
+                        <label>Доставка осуществляется из России?</label><br>
+                        <input type="radio" name="existence" value=true [(ngModel)]="selectedSupply.isAbroad">Да<br>
+                        <input type="radio" name="existence" value=false [(ngModel)]="selectedSupply.isAbroad">Нет<br>
+                    </div>
+                    <button style="margin-top: 10px;" (click)="updateTask()"
+                        [disabled]="titlein.invalid || creatorin.invalid">Сохранить</button><br>
+                </div>
+            </td>
+        </aside>
     </div>
-    </td>
-    </tr>
-  </table>
+</div>
