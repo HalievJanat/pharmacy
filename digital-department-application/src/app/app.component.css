@@ -3,9 +3,20 @@
 header {
     background: linear-gradient(to right, #0099ff, #66ccff);
     height: 60px;
-    width: 100;
     /* margin: -8px; */
 }
+
+a {
+    font-family: 'Roboto Regular';
+    font-style: normal;
+    text-decoration: none; 
+    color:#FFFFFF;
+    margin:8px;
+}
+
+a:link { color: #FFFFFF; }
+a:hover { color: #ffd000; }
+a:active { color: #ff9800; }
 
 .container {
     max-width: 1200px;
@@ -14,6 +25,6 @@ header {
 
 .header-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
 }
