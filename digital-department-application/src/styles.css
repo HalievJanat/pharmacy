@@ -1,0 +1,23 @@
+
+.wrapper {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@font-face {
+    font-family: 'Roboto Regular';
+    src: url('assets/fonts/roboto_regular.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto Light';
+    src: url('assets/fonts/roboto_light.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto Thin';
+    src: url('assets/fonts/roboto_Thin.ttf');
+}
